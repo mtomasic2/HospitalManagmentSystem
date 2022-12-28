@@ -1,10 +1,9 @@
 <?php
-include_once "php/functions.php";
 
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "hotelmanagmentsystem";
+$dbname = "hospitalmanagmentsystem";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
