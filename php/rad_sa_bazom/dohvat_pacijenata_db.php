@@ -1,13 +1,15 @@
 <?php
     if($_SESSION['user'] == 'admin'){
 ?>
-    <section class="sekcija_pacijenti">
+    <section class="p-5">
         <h2>Pacijenti</h2>
-        <a href="./unos_pacijenta.php" class="btn btn-primary my-2">Unesi pacijenta</a>
         <?php
         //$sql = "SELECT * FROM pacijent";
         //$sql = "SELECT id_pacijenta, ime, prezime, naziv as spol FROM pacijent INNER JOIN spol";
-        $sql = "SELECT id_pacijenta, ime, prezime, naziv as spol FROM pacijent, spol WHERE pacijent.Spol_id_spola=spol.id_spola";
+        $sql = "SELECT id_pacijenta, ime, prezime, spol.naziv as spol, id_sobe, kat 
+                FROM pacijent, spol, soba 
+                WHERE pacijent.Spol_id_spola=spol.id_spola AND pacijent.Soba_id_sobe=soba.id_sobe 
+                ORDER BY pacijent.id_pacijenta ASC";
         $result = $conn->query($sql);
         echo "<table class='table table-striped'>";
         if ($result->num_rows > 0) {
@@ -19,6 +21,8 @@
                         <th scope='col'>Ime</th>
                         <th scope='col'>Prezime</th>
                         <th scope='col'>Spol</th>
+                        <th scope='col'>Soba</th>
+                        <th scope='col'>Kat</th>
                         <th scope='col'></th>
                     </tr>
                 </thead><tbody>";
@@ -31,14 +35,17 @@
                         <td> {$row["ime"]} </td> 
                         <td> {$row["prezime"]} </td> 
                         <td> {$row["spol"]} </td>
+                        <td> {$row["id_sobe"]} </td>
+                        <td> {$row["kat"]}. kat </td>
                         <td> </td>
                     <tr>";
             }
         } else {
-            echo "0 results";
+            echo "0 redova";
         }
         echo "</tbody></table>";
         ?>
+        <a href="./unos_pacijenta.php" class="btn btn-primary my-2">Unesi pacijenta</a>
     </section>
 
 <?php

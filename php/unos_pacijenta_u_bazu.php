@@ -7,58 +7,67 @@
         $resultSpol = $conn->query($sqlSpol);
 ?>
 
-<section>
-    <form action="./php/rad_sa_bazom/unos_pacijenta_u_bazu_db.php" method="POST">
-        <div>
-            <label for="ime">Ime:</label>
-            <input type="text" name="ime">
-        </div>
-        <div>
-            <label for="prezime">Prezime:</label>
-            <input type="text" name="prezime">
-        </div>
-        <div>
-            <label for="datum">Datum rođenja:</label>
-            <input type="date" name="datum">
-        </div>
-        <div>
-            <label for="adresa">Adresa stanovanja:</label>
-            <input type="text" name="adresa">
-        </div>
-        <div>
-            <label for="kontakt_broj">Kontakt broj:</label>
-            <input type="text" name="kontakt_broj">
-        </div>
-        <div>
-            <label for="kontakt_email">Kontakt email:</label>
-            <input type="text" name="kontakt_email">
-        </div>
-        <div>
-            <label for="soba_id">Soba:</label>
-            <select name="soba_id">
-        
-            <?php while($row = $resultSobe->fetch_assoc()) { ?>
+<section class="p-5">
+    <div class="container p-0 m-0">
+        <div class="row p-0 m-0">
+            <div class="col-md-7 p-0 m-0">
+                <form class="w-md-100" action="./php/rad_sa_bazom/unos_pacijenta_u_bazu_db.php" method="POST">
+                    <h2>Unesi pacijenta</h2>
+                    <div class="form-group my-3">
+                        <label for="ime">Ime:</label>
+                        <input class="form-control" type="text" name="ime">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="prezime">Prezime:</label>
+                        <input class="form-control" type="text" name="prezime">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="datum">Datum rođenja:</label>
+                        <input class="form-control" type="date" name="datum">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="adresa">Adresa stanovanja:</label>
+                        <input class="form-control" type="text" name="adresa">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="kontakt_broj">Kontakt broj:</label>
+                        <input class="form-control" type="text" name="kontakt_broj">
+                    </div>
+                    <div class="form-group my-3"> 
+                        <label for="kontakt_email">Kontakt email:</label>
+                        <input class="form-control" type="text" name="kontakt_email">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="soba_id">Soba:</label>
+                        <select name="soba_id" class="custom-select form-control">
+                    
+                        <?php while($row = $resultSobe->fetch_assoc()) { ?>
 
-                <option value="<?php echo $row["id_sobe"]; ?>"><?php echo $row["id_sobe"]; ?></option>
+                            <option value="<?php echo $row["id_sobe"]; ?>"><?php echo "{$row["id_sobe"]} - {$row["kat"]}. kat"; ?></option>
 
-            <?php } ?>
+                        <?php } ?>
 
-            </select>
+                        </select>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="spol_id">Spol:</label>
+                        <select name="spol_id" class="custom-select form-control">
+                    
+                        <?php while($row = $resultSpol->fetch_assoc()) { ?>
+
+                            <option value="<?php echo $row["id_spola"]; ?>"><?php echo $row["naziv"]; ?></option>
+
+                        <?php } ?>
+
+                        </select>
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="submit" name="submit" value="Unesi pacijenta" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <label for="spol_id">Spol:</label>
-            <select name="spol_id">
-        
-            <?php while($row = $resultSpol->fetch_assoc()) { ?>
-
-                <option value="<?php echo $row["id_spola"]; ?>"><?php echo $row["naziv"]; ?></option>
-
-            <?php } ?>
-
-            </select>
-        </div>
-        <input type="submit" name="submit" value="Unesi pacijenta">
-    </form>
+    </div>
 </section>
 
 <?php
