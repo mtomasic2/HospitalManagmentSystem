@@ -24,6 +24,8 @@
                         <th scope='col'>Soba</th>
                         <th scope='col'>Kat</th>
                         <th scope='col'></th>
+                        <th scope='col'></th>
+                        <th scope='col'></th>
                     </tr>
                 </thead><tbody>";
             while($row = $result->fetch_assoc()) {
@@ -36,7 +38,9 @@
                         <td> {$row["prezime"]} </td> 
                         <td> {$row["spol"]} </td>
                         <td> {$row["id_sobe"]} </td>
-                        <td> {$row["kat"]}. kat </td>
+                        <td> {$row["kat"]}. kat </td>"?>
+                        <td> <a class='text-dark' onclick='return confirm("Jeste li sigurni da ovog pacijenta želite poslati kući?")' href='./php/rad_sa_bazom/posalji_kuci_db.php?id_pacijenta=<?php echo"{$row["id_pacijenta"]}'><i class='bi bi-house-down-fill'></i></a> </td>
+                        <td> <a class='text-dark' href='./izmjeni_pacijenta.php?id_pacijenta={$row["id_pacijenta"]}'><i class='bi bi-pencil-square'></i></a> </td>
                         <td> </td>
                     <tr>";
             }
@@ -54,4 +58,5 @@
     //header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
 }
 ?>
+
 
