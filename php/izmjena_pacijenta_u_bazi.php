@@ -54,7 +54,6 @@
                     
                         <?php while($row = $resultSobe->fetch_assoc()) { 
                             $prikaz_slobodne_sobe = (($row["popunjenost"] < $row["kapacitet"]) || ($resultPacijent["Soba_id_sobe"] == $row["id_sobe"])) ? "d-block" : "d-none";
-
                             $odabrana_soba = ($resultPacijent["Soba_id_sobe"] == $row["id_sobe"]) ? ' selected="selected"' : '';
                         ?>
 
