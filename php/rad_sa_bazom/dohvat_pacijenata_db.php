@@ -41,7 +41,7 @@
                         <td> {$row["kat"]}. kat </td>"?>
                         <td> <a class='text-dark' onclick='return confirm("Jeste li sigurni da ovog pacijenta želite poslati kući?")' href='./php/rad_sa_bazom/posalji_kuci_db.php?id_pacijenta=<?php echo"{$row["id_pacijenta"]}'><i class='bi bi-house-down-fill'></i></a> </td>
                         <td> <a class='text-dark' href='./izmjeni_pacijenta.php?id_pacijenta={$row["id_pacijenta"]}'><i class='bi bi-pencil-square'></i></a> </td>
-                        <td> </td>
+                        <td> <a class='text-dark' href='./unos_pregleda_pacijenta.php?id_pacijenta={$row["id_pacijenta"]}'><i class='bi bi-journal-medical'></i></a> </td>
                     <tr>";
             }
         } else {
