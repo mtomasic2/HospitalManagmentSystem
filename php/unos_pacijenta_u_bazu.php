@@ -1,10 +1,15 @@
 <?php
     if($_SESSION['user'] == 'admin'){
 
-        $sqlSobe = "SELECT * FROM soba";
         $sqlSpol = "SELECT * FROM spol";
+        $sqlSobe = "SELECT s.id_sobe,s.kat,s.kapacitet, COUNT(p.id_pacijenta) AS popunjenost
+                            FROM soba s
+                            LEFT JOIN pacijent p ON s.id_sobe = p.Soba_id_sobe
+                            GROUP BY s.id_sobe";
+
         $resultSobe = $conn->query($sqlSobe);
         $resultSpol = $conn->query($sqlSpol);
+
 ?>
 
 <section class="p-5">
@@ -41,9 +46,10 @@
                         <label for="soba_id">Soba:</label>
                         <select name="soba_id" class="custom-select form-control">
                     
-                        <?php while($row = $resultSobe->fetch_assoc()) { ?>
-
-                            <option value="<?php echo $row["id_sobe"]; ?>"><?php echo "{$row["id_sobe"]} - {$row["kat"]}. kat"; ?></option>
+                        <?php while($row = $resultSobe->fetch_assoc()) { 
+                            $prikaz_slobodne_sobe = ($row["popunjenost"] >= $row["kapacitet"]) ? "d-none" : "d-block";
+                        ?>
+                            <option class="<?php echo $prikaz_slobodne_sobe;?>" value="<?php echo $row["id_sobe"]; ?>"><?php echo "{$row["id_sobe"]} - {$row["kat"]}. kat ({$row["popunjenost"]}/{$row["kapacitet"]})"; ?></option>
 
                         <?php } ?>
 

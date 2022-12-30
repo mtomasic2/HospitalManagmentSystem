@@ -5,8 +5,11 @@
             $id_pacijenta = $_GET['id_pacijenta'];
 
             $sqlPacijent = "SELECT * FROM pacijent WHERE id_pacijenta={$id_pacijenta}";
-            $sqlSobe = "SELECT * FROM soba";
             $sqlSpol = "SELECT * FROM spol";
+            $sqlSobe = "SELECT s.id_sobe,s.kat,s.kapacitet, COUNT(p.id_pacijenta) AS popunjenost
+                            FROM soba s
+                            LEFT JOIN pacijent p ON s.id_sobe = p.Soba_id_sobe
+                            GROUP BY s.id_sobe";
     
             $resultPacijent = ($conn->query($sqlPacijent))->fetch_assoc();
             $resultSobe = $conn->query($sqlSobe);
@@ -49,9 +52,13 @@
                         <label for="soba_id">Soba:</label>
                         <select name="soba_id" class="custom-select form-control">
                     
-                        <?php while($row = $resultSobe->fetch_assoc()) { ?>
+                        <?php while($row = $resultSobe->fetch_assoc()) { 
+                            $prikaz_slobodne_sobe = (($row["popunjenost"] < $row["kapacitet"]) || ($resultPacijent["Soba_id_sobe"] == $row["id_sobe"])) ? "d-block" : "d-none";
 
-                            <option value="<?php echo $row["id_sobe"]; ?>" <?php if ($resultPacijent["Soba_id_sobe"] == $row["id_sobe"]) echo ' selected="selected"'; ?> ><?php echo "{$row["id_sobe"]} - {$row["kat"]}. kat"; ?></option>
+                            $odabrana_soba = ($resultPacijent["Soba_id_sobe"] == $row["id_sobe"]) ? ' selected="selected"' : '';
+                        ?>
+
+                            <option class="<?php echo $prikaz_slobodne_sobe;?>" value="<?php echo $row["id_sobe"]; ?>" <?php echo $odabrana_soba;?> ><?php echo "{$row["id_sobe"]} - {$row["kat"]}. kat ({$row["popunjenost"]}/{$row["kapacitet"]})"; ?></option>
 
                         <?php } ?>
 

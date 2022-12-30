@@ -12,15 +12,13 @@
         $spol_id = $_POST['spol_id'];
 
         $sql = "INSERT INTO pacijent (ime, prezime, datum_rodjenja, adresa, kontakt_broj, kontakt_mail, Soba_id_sobe, Spol_id_spola)
-        VALUES ('$ime', '$prezime', '$datum_rodjenja', '$adresa', '$kontakt_broj', '$kontakt_mail', $soba_id, $spol_id)";
+                VALUES ('$ime', '$prezime', '$datum_rodjenja', '$adresa', '$kontakt_broj', '$kontakt_mail', $soba_id, $spol_id)";
 
         if ($conn->query($sql) === TRUE) {
             header('Location: ../../pacijenti.php');
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
-
     }
-
     //header('Location: ../../pacijenti.php');
 ?> 
