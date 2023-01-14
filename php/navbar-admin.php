@@ -13,9 +13,6 @@
       <li class="nav-item">
         <a class="nav-link" href="./pregledi.php">Pregledi</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="./sobe.php">Sobe</a>
-      </li>
     </ul>
   </div>
 </nav>
