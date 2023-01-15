@@ -43,7 +43,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group my-3">
-                                    <input type="submit" name="submit" value="Unesi pregled" class="btn btn-primary">
+                                    <input type="submit" name="submit" onclick='return confirm("Jeste li sigurni da želite zakazati pregled?")' value="Unesi pregled" class="btn btn-primary">
                                 </div>
                             </form>
                         </div>

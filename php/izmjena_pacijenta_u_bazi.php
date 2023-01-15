@@ -76,7 +76,7 @@
                             </select>
                         </div>
                         <div class="form-group my-3">
-                            <input type="submit" name="update" value="Izmjena pacijenta" class="btn btn-primary">
+                            <input type="submit" name="update" onclick='return confirm("Jeste li zadovoljni promjenom?")' value="Izmjena pacijenta" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
